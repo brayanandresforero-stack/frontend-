@@ -29,7 +29,8 @@ const app = express();
 // ─── Middlewares globales ───
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  // FRONTEND_URL = URL de Vercel (sin / al final). Los localhost siguen sirviendo para desarrollo.
+  origin: [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'].filter(Boolean),
   credentials: true,
 }));
 app.use(express.json());
