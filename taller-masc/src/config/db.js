@@ -10,6 +10,8 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   connectionLimit: process.env.DB_POOL_LIMIT || 10,
   waitForConnections: true,
+  // Aiven exige SSL. Solo se activa si en el entorno existe DB_SSL=true (en local no hace falta)
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
 });
 
 // Verificar conexión al iniciar
